@@ -5,7 +5,9 @@ export default function Home() {
     <>
     <HeadComp />
     <main>
+      <section className="bg-white h-screen">
 
+      </section>
     </main>
     </>
   )
