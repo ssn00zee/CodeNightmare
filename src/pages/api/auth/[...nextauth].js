@@ -11,6 +11,12 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET
     })
   ],
+  callbacks: {
+    session: async ({session, user}) => {
+      session.user.id = user.id
+      return Promise.resolve(session)
+    }
+  },
   secret: process.env.NEXT_AUTH_SECRET
 }
 

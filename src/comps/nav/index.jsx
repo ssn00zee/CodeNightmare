@@ -19,9 +19,9 @@ export default function Nav(){
           </Link>
         </div>
         <ul className='flex gap-10 text-white items-center'>
-          <li onClick={() => r.push('/')}>Home</li>
-          <li onClick={() => r.push('/profile')}>Profile</li>
-          <li onClick={() => r.push('/friends')}>Friends</li>
+          <li className='cursor-pointer' onClick={() => r.push('/')}>Home</li>
+          <li className='cursor-pointer' onClick={() => r.push('/profile')}>Profile</li>
+          <li className='cursor-pointer' onClick={() => r.push('/friends')}>Friends</li>
         <div className='flex item-center'>
           <Button onClick={() => signOut()} name='Logout' className='text-white'/>
         </div>
