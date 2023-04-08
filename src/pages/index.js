@@ -12,12 +12,15 @@ export default function Home({
   allPosts
 }) {
 
+  
+
   const { data: session } = useSession()
   const [posts, setPosts] = useState(allPosts)
 
   useEffect(() => {
     // console.log(posts, 'useEffect')
     // setPosts(posts)
+    console.log(allPosts, 'useEffect')
   }, [posts])
 
   if (!session){
@@ -53,11 +56,39 @@ export default function Home({
 export async function getServerSideProps(ctx){
 
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
+  try {
+    if (!session){
+      return {
+        redirect: {
+          destination: '/api/auth/signin',
+          permanent: false
+        }
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
   const res = await axios.get(process.env.AXIOS_URL, {
     headers: {
       cookie: ctx.req.headers.cookie
     }
   })
+
+  try {
+    if (!res.data){
+      return {
+        redirect: {
+          destination: '/api/auth/signin',
+          permanent: false
+        }
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  
   const allPosts = await res.data
 
 
