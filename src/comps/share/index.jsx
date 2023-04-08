@@ -8,12 +8,17 @@ export default function Share({
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [err, setErr] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!title.trim() || !content.trim()) {
       console.log("Title and content fields are required")
+      setErr(true)
+      setTimeout(() => {
+        setErr(false)
+      }, 2000)
       return
     }
 
@@ -33,6 +38,9 @@ export default function Share({
       <form method="POST" className="flex flex-col gap-8">
         <input required={true} type="text" placeholder='title' onChange={(e) => setTitle(e.target.value)} className='p-2 border'/>
         <textarea required placeholder='content' value={content} onChange={(e) => setContent(e.target.value)} className='resize-none p-2 border' />
+      {
+        err ? <p className='text-red-600'>You need a title and content, nerd!</p> : null
+      }
         <div className="w-full flex justify-end p-4">
           <Button onClick={handleSubmit} name='Share' className='text-white border w-24 py-2 rounded-md bg-[#4766a7] flex justify-center items-center'/>
         </div>
