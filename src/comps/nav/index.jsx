@@ -15,7 +15,7 @@ export default function Nav(){
       <nav className='absolute w-full flex justify-evenly p-4 bg-[#4766a7]'>
         <div>
           <Link href="/">
-            <Image src='/facebook-logo.jpg' width={100} height={25} className='cursor-pointer'/>
+            <Image src='/facebook-logo.jpg' width={100} height={25} className='cursor-pointer' alt='Main Logo'/>
           </Link>
         </div>
         <ul className='flex gap-10 text-white items-center'>
@@ -34,7 +34,7 @@ export default function Nav(){
       <nav className='absolute w-full flex justify-evenly p-4 bg-[#4766a7]'>
         <div className='flex w-full justify-evenly'>
           <Link href="/">
-            <Image src='/facebook-logo.jpg' width={100} height={25} className='cursor-pointer'/>
+            <Image src='/facebook-logo.jpg' width={100} height={25} className='cursor-pointer' alt='Main Logo'/>
           </Link>
           
           <Button onClick={() => signIn()} name='Sign In' className='text-white'/>
