@@ -6,13 +6,28 @@ export default async function handler(req, res){
   const { method } = req
 
   switch(method) {
-    case 'POST': 
+    case 'GET': // Modified method to GET
     const session = await getServerSession(req, res, authOptions)
-
-    console.log(session)
 
 
     if (!session){
+      res.status(401).json({error: 'Unauthorized'})
+      return
+    }
+
+    // Use the findMany method to fetch all the posts
+    const posts = await prisma.post.findMany()
+
+    res.status(200).json(posts) // Return the posts as a JSON response
+    break
+
+    case 'POST': 
+    const sessionPost = await getServerSession(req, res, authOptions)
+
+    console.log(sessionPost)
+
+
+    if (!sessionPost){
       res.status(401).json({error: 'Unauthorized'})
       return
     }
@@ -22,7 +37,7 @@ export default async function handler(req, res){
       data: {
         title,
         content,
-        userId: session.user.id
+        userId: sessionPost.user.id
       }
     })
 
