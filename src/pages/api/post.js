@@ -28,7 +28,7 @@ export default async function handler(req, res){
     case 'POST': 
     const sessionPost = await getServerSession(req, res, authOptions)
 
-    console.log(sessionPost)
+    // console.log(sessionPost)
 
 
     if (!sessionPost){
@@ -42,8 +42,13 @@ export default async function handler(req, res){
         title,
         content,
         userId: sessionPost.user.id
+      },
+      include: {
+        user: true
       }
     })
+
+    // console.log(post)
 
     res.status(201).json(post)
     break

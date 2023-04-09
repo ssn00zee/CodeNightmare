@@ -42,7 +42,7 @@ export default function Home({
     <main className="h-screen">
       <section className="bg-white flex justify-center align-center pt-24 gap-16">
         <Profile session={session}/>
-        <Share messageData={(messageData) => setPosts([...posts, messageData])} />
+        <Share messageData={(messageData) => {setPosts([...posts, messageData.data]), console.log(messageData.data, 'from INdex')}} />
       </section>
       <section className="flex justify-center pt-24">
         <Feed posts={posts} />

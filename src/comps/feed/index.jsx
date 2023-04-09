@@ -4,7 +4,7 @@ export default function Feed({
   posts
 }){
 
-  console.log(posts)
+  // console.log(posts)
 
   return (
     <div className="w-[80%] flex justify-center flex-col gap-6 m-4">
@@ -13,12 +13,18 @@ export default function Feed({
         {posts &&
           posts.map((post) => {
             
+            console.log(post, 'post')
             const { id, title, content, createdAt, user } = post
 
-            const time = () => {
+            const time = (createdAt) => {
+
+              // if (!createdAt && post.statusText === 'Created') {
+              //   console.log(post, 'post')
+              // } 
+              // console.log(createdAt, 'createdAt')
 
               if (!createdAt) {
-                return 'N/A'
+                return 'just now'
               }
 
               const utcTimestamp = createdAt
@@ -30,20 +36,20 @@ export default function Feed({
             }
 
             return (
-              <div key={id} className='flex flex-col gap-4 w-64 border p-4'>
+              <div key={id} className='flex flex-col gap-4 w-full border p-4'>
                 <h1 className="text-3xl">{title}</h1>
                 <p>{content}</p>
-                <div className="flex flex-col justify-center  gap-1">
+                <p>{time(createdAt)}</p>
+                <div className="flex flex-col justify-center items-end w-full gap-1">
                   {
                     user &&  (
-                      <>
-                        <Image src={user.image} height={30} width={30}/>
+                      <div className="w-36 flex flex-col items-center">
+                        <Image src={user.image} height={30} width={30} className='object-contain' alt={user.name}/>
                         <p>{user.name}</p>
-                      </>
+                      </div>
                     )
                   }
                 </div>
-                <p>{time()}</p>
               </div>
             )
           })
