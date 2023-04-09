@@ -16,7 +16,11 @@ export default async function handler(req, res){
     }
 
     // Use the findMany method to fetch all the posts
-    const posts = await prisma.post.findMany()
+    const posts = await prisma.post.findMany({
+      include: {
+        user: true
+      }
+    })
 
     res.status(200).json(posts) // Return the posts as a JSON response
     break
